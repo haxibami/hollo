@@ -53,22 +53,18 @@ export function Profile({ accountOwner }: ProfileProps) {
       <div dangerouslySetInnerHTML={{ __html: bioHtml }} />
       {account.fieldHtmls && (
         <table>
-          <thead>
-            <tr>
-              {Object.keys(account.fieldHtmls).map((key) => (
-                <th>{key}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {Object.values(account.fieldHtmls).map((value) => (
+          <tbody style="display: flex; flex-wrap: wrap;">
+            {Object.entries(account.fieldHtmls).map(([key, value]) => (
+              <tr style="flex: 1 1 auto; display: flex; max-width: 100%; flex-direction: column;">
+                <th>
+                  <b>{key}</b>
+                </th>
                 <td
                   // biome-ignore lint/security/noDangerouslySetInnerHtml: no xss
                   dangerouslySetInnerHTML={{ __html: value }}
                 />
-              ))}
-            </tr>
+              </tr>
+            ))}
           </tbody>
         </table>
       )}
